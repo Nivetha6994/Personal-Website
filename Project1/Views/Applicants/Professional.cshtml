@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Project1.Models.Professional>
+
+@{
+    ViewData["Title"] = "Professional";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="color:#d04261;text-align:center">Professional Experience Information</h1>
+<table class="table" align="center">
+    <thead>
+        <tr style="text-align:center">
+            @if (User.IsInRole("Admin"))
+            {
+                <th>
+                    <a asp-action="CreateProfession">Create Professional Record</a>
+                </th>
+                <th>
+                    <a asp-action="CreateProject" asp-route-id="1">Add Project</a>
+                </th>
+            }
+            <th>
+                <a asp-action="Project" asp-route-id="1">View Projects</a>
+            </th>
+        </tr>
+    </thead>
+</table>
+<spacer-35></spacer-35>
+@{ var myList = Model.ToList();
+    if (myList.Count != 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CompanyName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DepartmentName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoleDescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TechnologiesUsed)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompanyName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DepartmentName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoleDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TechnologiesUsed)
+                        </td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a asp-action="EditProfession" asp-route-id="@item.ProfessionalId">Edit</a> |
+                                @*<a asp-action="Details" asp-route-id="@item.ProfessionalId">Details</a> |*@
+                                <a asp-action="DeleteProfession" asp-route-id="@item.ProfessionalId">Delete</a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="color:#d04261;text-align:center">No records. Create a Record</p>
+    }
+}
+<div>
+    <p style="color:#d04261;float:right">
+        Links:
+        <a asp-action="Index">Home</a>
+    </p>
+</div>
+

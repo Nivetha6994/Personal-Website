@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="css/site.css" />
+    <script src="js/site.js"></script>
+</head>
+<body onload=IntroFunc()>
+    <div id="page-border">
+        <header id="header">
+            <nav id="nav" class="center grid-1">
+                <p class="logo text-left">
+                    <a asp-action="Index" class="site-logo" href="../" alt="Home" title="Designed by Nivetha Ramachandran">
+                        <span class="logo-text">N.R</span>
+                    </a>
+                </p>
+                <p class="text-right">
+                    <a href="https://www.linkedin.com/in/nivetha-ramachandran/">LinkedIn</a>
+                </p> |
+                <p class="text-right">
+                    Email: niramach@syr.edu
+                </p> |
+                <p class="text-right">
+                    Phone: 315-224-0700
+                </p>
+            </nav>
+        </header>
+        <div style="overflow: auto">
+            <div class="Intro">
+            </div>
+            <div class="Photo">
+                <img src="images/Profile.jpg" onmouseover="change(this)" onmouseout="changeback(this)" alt="Profile Picture">
+            </div>
+        </div>
+
+        <spacer-35></spacer-35>
+        <hr>
+        <spacer-35></spacer-35>
+        <div class="flip-box color1">
+            <div class="flip-box-inner ">
+                <div class="flip-box-front">
+                    <h1>Academics</h1>
+                    <p>
+                        Education is not the learning of facts,
+                        But the training of the mind to think.
+                    </p>
+                    <p>-Albert Einstein</p>
+                </div>
+                <div class="flip-box-back color3">
+                    <h2>Educational Background</h2>
+                    <ul>
+                        <li>
+                            Bachelors in Computer Engineering,
+                            University of Mumbai,India
+                            <p>
+                                Class of 2017
+                            </p>
+                        </li>
+                        <li>
+                            Masters in Computer Science,
+                            Syracuse University
+                            <p>
+                                Class of 2020
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="flip-box color2">
+            <div class="flip-box-inner ">
+                <div class="flip-box-front">
+                    <h1>Industry Exposure</h1>
+                    <p>The only source of knowledge is experience.</p>
+                    <p>-Albert Einstein</p>
+                </div>
+                <div class="flip-box-back color3">
+                    <h2>Professional Experience</h2>
+                    <ul>
+                        <li>
+                            Software Developer, Ingram Micro
+                            <p>B2B-D2O team, Asia Pacific Department</p>
+                            <p>2017-2018</p>
+                        </li>
+                        <li>
+                            Web Development Intern, Godrej Infotech
+                            <p>Summer Intern</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

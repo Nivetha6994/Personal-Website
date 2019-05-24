@@ -1,0 +1,13 @@
+﻿@page
+@model LogoutModel
+@{
+    ViewData["Title"] = "Log out";
+}
+
+<header>
+    <h1 style="color:#d04261;">@ViewData["Title"]</h1>
+    <p style="color:#d04261;">Please Confirm that you want to logout</p>
+    <form id="confirm" method="post" asp-page="./Logout" asp-route-returnUrl="@Url.Page("/Index")">
+        <button type="submit">Confirm</button>
+</form>
+</header>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CoreConsoleClient": {
+      "commandName": "Project",
+      "commandLineArgs": "https://localhost:44359/api/FileUpload /dn 6"
+    }
+  }
+}

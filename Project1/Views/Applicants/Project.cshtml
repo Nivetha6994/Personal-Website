@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Project1.Models.Project>
+@using Project1.Models
+@{
+    ViewData["Title"] = "Project";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="color:#d04261;text-align:center">Projects Undertaken</h1>
+@if (User.IsInRole("Admin"))
+{
+    <p style="color:#d04261;text-align:center">
+        <a asp-action="CreateProject">Add Project</a>
+    </p>
+}
+
+
+        <form asp-action="Project">
+            <div class="form-group">
+                <h3>View Projects of Type:</h3>
+                @Html.DropDownList("ProjectDisplayDDL", "")
+                @*@Html.DropDownList("ProjectDisplayDDL",
+                    new SelectList(Enum.GetValues(typeof(ProjectDisplay))))*@
+
+                <input style="width:10%" id="Submit1" type="submit" value="Filter" />
+            </div>
+            @*@Html.DropDownList("ProjectType",
+                new SelectList(Enum.GetValues(typeof(ProjectType))))*@
+        </form>
+        <spacer-35></spacer-35>
+
+        <table class="table" align="center">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Technology)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        Project Type
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Technology)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+
+                            @Html.DisplayFor(modelItem => item.ptype)
+                        </td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a asp-action="EditProject" asp-route-id="@item.ProjectId">Edit</a> |
+                                @*<a asp-action="Details" asp-route-id="@item.ProjectId">Details</a> |*@
+                                <a asp-action="DeleteProject" asp-route-id="@item.ProjectId">Delete</a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    
+    
+
+<div>
+    <p style="color:#d04261;float:right">
+        Links:
+        <a asp-action="Index">Home|</a>
+        <a asp-action="Academic">Academic|</a>
+        <a asp-action="Professional">Professional</a>
+    </p>
+</div>

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Project1.Models.Recruiter>
+
+@{
+    ViewData["Title"] = "Comment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="color:#d04261;text-align:center">Comment</h1>
+@*Create only when no comment*@
+<p>
+
+    @if (User.IsInRole("User"))
+    {
+        var myList1 = Model.ToList();
+        var item = myList1[0];
+        if (item.Comments == null || item.Comments == "")
+        {
+            <a asp-action="CreateComment" asp-controller="Recruiters" asp-route-id="@item.RecruiterID" asp-route-email="@item.RecruiterEmail">Add Comment</a>
+        }
+    }
+</p>
+
+@{ var myList = Model.ToList();
+    if (myList.Count != 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RecruiterEmail)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Comments)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    @if ((User.IsInRole("User") || User.IsInRole("Admin")) && (item.Comments != null && item.Comments != ""))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RecruiterEmail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comments)
+                        </td>
+                    }
+                        @if (User.IsInRole("User") && (item.Comments != null && item.Comments != ""))
+                        {
+                            <td>
+                                <a asp-action="EditComment" asp-controller="Recruiters" asp-route-id="@item.RecruiterID">Edit</a> |
+                                @*<a asp-action="Details" asp-route-id="@item.RecruiterID">Details</a> |*@
+
+                            </td>
+                        }
+                        @if ((User.IsInRole("User") || User.IsInRole("Admin")) && (item.Comments != null && item.Comments != ""))
+                        {
+                            <td>
+                                <a asp-action="DeleteComment" asp-controller="Recruiters" asp-route-id="@item.RecruiterID">Delete</a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="color:#d04261;text-align:center">No records to display</p>
+    }
+}
+<div>
+    <p style="color:#d04261;float:right">
+        Links:
+        <a asp-action="Index" asp-controller="Applicants">Home</a>
+    </p>
+</div>

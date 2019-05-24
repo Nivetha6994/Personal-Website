@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Project1.Models.Academic>
+
+@{
+    ViewData["Title"] = "Academic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="color:#d04261;text-align:center">Academic Information</h1>
+<table class="table" align="center">
+    <thead>
+        <tr style="text-align:center">
+            @if (User.IsInRole("Admin"))
+            {
+                <th>
+                    <a asp-action="CreateAcademic">Create Academic Record</a>
+                </th>
+                <th>
+                    <a asp-action="CreateProject" asp-route-id="2">Add Project</a>
+                </th>
+            }
+            <th>
+                <a asp-action="Project" asp-route-id="2">View Projects</a>
+            </th>
+        </tr>
+    </thead>
+</table>
+<spacer-35></spacer-35>
+@{ var myList = Model.ToList();
+    if (myList.Count != 0)
+    {
+        <table class="table" align="center">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SchoolName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Degree)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GraduationYear)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GPA)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SchoolName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Degree)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GraduationYear)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GPA)
+                        </td>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a asp-action="EditAcademic" asp-route-id="@item.AcademicId">Edit</a> |
+                                <a asp-action="DeleteAcademic" asp-route-id="@item.AcademicId"> Delete </a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="color:#d04261;text-align:center">No records. Create a Record</p>
+    }
+}
+        <div>
+            <p style="color:#d04261;float:right">
+                Links:
+                <a asp-action="Index">Home</a>
+            </p>
+        </div>

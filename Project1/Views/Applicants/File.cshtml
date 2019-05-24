@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Project1.Models.FileData>
+
+@{
+    ViewData["Title"] = "File";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="color:#d04261;text-align:center">Files Uploaded</h1>
+@if (User.IsInRole("Admin"))
+{
+    <p style="color:#d04261;">
+        <a asp-action="CreateFile" asp-controller="Applicants">Create New File Data</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileDescription)
+            </th>
+            <th> Actions</th>
+            <th>Download</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileDescription)
+            </td>
+            <td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <form asp-controller="FileUpload" asp-action="Delete" asp-route-id="@item.FileDataId"
+                          enctype="multipart/form-data" method="post">
+                        <button class="uploadButton" type="submit">Delete File</button>
+                    </form>
+                }
+            </td>
+            <td>
+                <a asp-action="DownloadFile" asp-controller="FileUpload" asp-route-id="@item.FileDataId"  asp-route-flag="1">Download</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
